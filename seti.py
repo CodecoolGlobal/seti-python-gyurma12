@@ -58,23 +58,25 @@ def base_to_decimal(digits, original_base):
     n = len(code_to_convert)
     return sum
 
+digits_in_string = [2, 16, 9, 11]
 
 def digits_as_string(digits, base):
     """Returns the string representation of an array of digits given in base"""
     base_num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"]
 
-    digits_in_string = [2, 15, 9, 11]
     converted = []
-    k = 0
+    if base > 16:
+        raise ValueError
+    for j in digits:
+        if j > base-1:
+            raise ValueError         
     for i in range(len(digits_in_string)):
-        if digits_in_string[i] > 9:
             converted.append(base_num[digits_in_string[i]])
-        else:
-            converted.append(digits_in_string[i])
     return converted
-
 
 def convert_base(original_digits, original_base, destination_base):
     """Conversion from any base to any other base"""
     converted_digit = decimal_to_base(base_to_decimal(original_digits, original_base), destination_base)
     return converted_digit
+
+print(digits_as_string(digits_in_string, 16))
